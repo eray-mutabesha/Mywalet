@@ -1,0 +1,24 @@
+{
+  "Utilisateur": [
+    {
+      "id": "716c",
+      "nom": "eray",
+      "post_nom": "mutabesha",
+      "Genre": "masculain",
+      "Statut": "celibataire",
+      "Email": "eray@gmail.com",
+      "mot_depasse": "1234567",
+      "confirm_mot_depasse": "1234567"
+    },
+    {
+      "id": "6c4c",
+      "nom": "eray",
+      "post_nom": "mutabesha",
+      "Genre": "masculain",
+      "Statut": "celibataire",
+      "Email": "daniel@gmail.com",
+      "mot_depasse": "2222222",
+      "confirm_mot_depasse": "2222222"
+    }
+  ]
+}
