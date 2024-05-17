@@ -21,7 +21,7 @@ function Connexion() {
      axios.get(`http://localhost:3000/Utilisateur?Email=${data.Email}&mot_depasse=${data.mot_depasse}`).then((res)=>{
       if(res.data.length > 0){
          //inserssion des donnes dans le local storage
-        localStorage.setItem("Utilisateur", JSON.stringify(res.data[0]))
+        // localStorage.setItem("Utilisateur", JSON.stringify(res.data[0]))
         toast.success("Connexion reussi");
         navigate("/");
       }
