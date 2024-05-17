@@ -4,6 +4,7 @@ import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import Dashboard from './Pages/Acceuil/Dashboard.jsx'
 import Connexion from './Pages/connexion/Connexion.jsx'
 import Inscription from './Pages/Inscription/Inscription.jsx'
+import LesEntres from './Pages/ComponentPages/LesEntres.jsx'
 import { Toaster } from 'react-hot-toast'
 
 
@@ -19,6 +20,10 @@ const routes=createBrowserRouter([
   {
     path:"/inscription",
     element:<Inscription />
+  },
+  {
+    path:"/entre",
+    element:<LesEntres />
   }
 ])
 

@@ -7,8 +7,15 @@ import { Box,Button } from '@mui/material'
 import TableauResultat from './component/TableauResultat'
 import MonCompt from './component/MonCompt'
 import Paramettre from './component/Paramettre'
+import { useNavigate } from 'react-router-dom'
+
+
 function Dashboard() {
-  
+
+  const navigate= useNavigate();
+  const handleEntre=()=>{
+     navigate("/entre")
+  } 
   return (
     <>
     <div className='div_one'>
@@ -21,7 +28,7 @@ function Dashboard() {
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-     
+        onClick={handleEntre}
       >
         Les entres
       </Button>
