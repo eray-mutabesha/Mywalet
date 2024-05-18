@@ -22,25 +22,34 @@
     gap: 5px;
 }
 .div_two{
-    display: grid;
-    grid-template-columns:60% 40%;
+    /* display: grid;
+    grid-template-columns:40% 40%; */
+    display: flex;
+    justify-content:center;
     margin-top: 100px;
+   
+    
 }
 .div_two nav {
-   
+    
     display: block;
     align-items: center;
     justify-content: center;
+   
     
   
 }
-.div_two nav p{
-    margin: 60px;
+.div_two form{
+    width: 70%;
+    margin: 40px;
     text-align: justify;
 }
 .div_two nav img{
-   
+ 
     
+}
+.form_nav{
+    width: 40%;
 }
 .image_nav{
     text-align: center;

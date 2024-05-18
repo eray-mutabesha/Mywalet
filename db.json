@@ -20,5 +20,56 @@
       "mot_depasse": "2222222",
       "confirm_mot_depasse": "2222222"
     }
+  ],
+  "LesEntres": [
+    {
+      "id": "31e8",
+      "data_de_tansaction": "2024-05-18",
+      "Provenence": "commerce",
+      "Montant": "700",
+      "Action": "construction"
+    },
+    {
+      "id": "099c",
+      "data_de_tansaction": "2024-05-10",
+      "Provenence": "immobilier",
+      "Montant": "300",
+      "Action": "etudes"
+    },
+    {
+      "id": "05f6",
+      "data_de_tansaction": "2024-05-18",
+      "Provenence": "immobilier",
+      "Montant": "222",
+      "Action": "construction"
+    },
+    {
+      "id": "f768",
+      "data_de_tansaction": "2024-05-18",
+      "Provenence": "immobilier",
+      "Montant": "222",
+      "Action": "construction"
+    },
+    {
+      "id": "3e26",
+      "data_de_tansaction": "2024-05-18",
+      "Provenence": "immobilier",
+      "Montant": "222",
+      "Action": "construction"
+    },
+    {
+      "id": "57bd",
+      "data_de_tansaction": "2024-05-18",
+      "Provenence": "immobilier",
+      "Montant": "222",
+      "Action": "construction"
+    },
+    {
+      "id": "5ed8",
+      "data_de_tansaction": "2024-05-18",
+      "Provenence": "commerce",
+      "Montant": "22222",
+      "Action": "construction"
+    }
   ]
 }
