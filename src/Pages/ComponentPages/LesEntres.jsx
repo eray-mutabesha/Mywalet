@@ -1,16 +1,18 @@
 import React from 'react'
 import './components.css/LesEntres.css'
 import axios from 'axios'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 function LesEntres() {
   const [datas,setdatas]=useState([])
   
+
+useEffect(()=>{
   const getData = async () => {
     
     try {
       // Fetch posts data
       const data = await axios.get('http://localhost:3000/LesEntres');
-      setdatas(data.data[0]);
+      setdatas(data.data);
   
       
     } catch (error) {
@@ -19,6 +21,9 @@ function LesEntres() {
   };
   
   getData();
+},[])
+
+  
     
   return (
     <div>
@@ -33,21 +38,20 @@ function LesEntres() {
           </tr>
             
         </thead>
+        <tbody >
+    {datas.map((dat, index) => (
        
-{datas.map(dat=>(
-         <tbody>
-         <tr>
-         <td>{dat.data_de_tansaction}</td>
-         <td>{dat.Provenence}</td>
-         <td>{dat.Montant}</td>
-         <td>{dat.Action}</td>
-         </tr>
-         
-        </tbody>
-        ))}
-       
-      
-      </table>
+      <tr  key={index}>
+        <td>{dat.data_de_tansaction}</td>
+        <td>{dat.Provenence}</td>
+        <td>{dat.Montant}$</td>
+        <td>{dat.Action}</td>
+      </tr>
+     
+    ))}
+   </tbody>
+</table>
+  
     </div>
   )
 }
