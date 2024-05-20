@@ -2,17 +2,22 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Sorties() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate=useNavigate()
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+ const handleretrait=()=>{
+  navigate("/sorties")
+ }
   return (
     <div>
       <Button
@@ -34,7 +39,7 @@ export default function Sorties() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Faire un retrait</MenuItem>
+        <MenuItem onClick={handleretrait}>Faire un retrait</MenuItem>
         <MenuItem onClick={handleClose}>Tableau des sorties</MenuItem>
        
       </Menu>

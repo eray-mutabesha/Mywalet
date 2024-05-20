@@ -4,7 +4,6 @@ import axios from 'axios'
 import { useState,useEffect } from 'react';
 import { Stack,Box,Button,Link,TextField} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
-
 import TableauResultat from '../Acceuil/component/TableauResultat'
 import MonCompt from '../Acceuil/component/MonCompt'
 import Paramettre from '../Acceuil/component/Paramettre'
@@ -74,8 +73,6 @@ let sommeDesEntres=0;
     <nav><MonCompt/></nav>
     <nav><Paramettre /></nav>
     </div>
-
-
 
     <div>
       <h1>TABLEAU DES DEPOTS</h1>

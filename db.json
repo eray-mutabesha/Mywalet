@@ -85,5 +85,19 @@
       "Montant": "45000",
       "Action": "management"
     }
+  ],
+  "sorties": [
+    {
+      "id": "32cb",
+      "designation": "designation",
+      "data": "2024-05-20",
+      "montant": "40"
+    },
+    {
+      "id": "f478",
+      "designation": "encore",
+      "data": "2024-05-20",
+      "montant": "500"
+    }
   ]
 }

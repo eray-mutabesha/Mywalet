@@ -6,6 +6,8 @@ import Connexion from './Pages/connexion/Connexion.jsx'
 import Inscription from './Pages/Inscription/Inscription.jsx'
 import LesEntres from './Pages/ComponentPages/LesEntres.jsx'
 import { Toaster } from 'react-hot-toast'
+import LesSorties from './Pages/ComponentPages/LesSorties.jsx'
+
 
 
 const routes=createBrowserRouter([
@@ -24,6 +26,10 @@ const routes=createBrowserRouter([
   {
     path:"/entre",
     element:<LesEntres />
+  },
+  {
+    path:"/sorties",
+    element:<LesSorties />
   }
 ])
 
