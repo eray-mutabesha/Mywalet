@@ -4,11 +4,18 @@ import { useForm} from "react-hook-form"
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 
 function Inscription() {
+    
     const navigate=useNavigate();
+      useEffect(()=>{
+       if(localStorage.getItem("Utilisateur")){
+          navigate("/");
+         }
+       })
     const { register, handleSubmit,formState:{errors} } = useForm();
     const onSubmit=(data)=>{
         if(data.mot_depasse !== data.confirm_mot_depasse){

@@ -18,6 +18,9 @@ export default function Sorties() {
  const handleretrait=()=>{
   navigate("/sorties")
  }
+ const handleTableau = () => {
+  navigate("/tableaudessorties")
+};
   return (
     <div>
       <Button
@@ -40,7 +43,7 @@ export default function Sorties() {
         }}
       >
         <MenuItem onClick={handleretrait}>Faire un retrait</MenuItem>
-        <MenuItem onClick={handleClose}>Tableau des sorties</MenuItem>
+        <MenuItem onClick={handleTableau}>Tableau des sorties</MenuItem>
        
       </Menu>
     </div>

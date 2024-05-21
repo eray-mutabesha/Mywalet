@@ -1,3 +1,4 @@
+
 import React from 'react'
 import './components.css/LesEntres.css'
 import axios from 'axios'
@@ -11,9 +12,9 @@ import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { Margin } from '@mui/icons-material';
 
-function LesEntres() {
+function TableauDesSorties() {
+    const navigate=useNavigate();
   const [datas,setdatas]=useState([])
-  const navigate = useNavigate()
   const handleAcceuil=()=>{
     navigate("/")
   }
@@ -27,7 +28,7 @@ useEffect(()=>{
     
     try {
       // Fetch posts data
-      const data = await axios.get('http://localhost:3000/LesEntres');
+      const data = await axios.get('http://localhost:3000/sorties');
       setdatas(data.data);
   
       
@@ -38,7 +39,7 @@ useEffect(()=>{
   
   getData();
 },[])
-let sommeDesEntres=0;
+
 
   
     
@@ -90,14 +91,13 @@ let sommeDesEntres=0;
     </div>
 
     <div>
-      <h1>TABLEAU DES DÉPÔTS</h1>
+      <h1>LES RETRAITS EFFECTUÉS</h1>
       <table>
         <thead>
           <tr>
           <th>Date de transaction</th>
-            <th>Provenence</th>
+            <th>Designation</th>
             <th>Montant</th>
-            <th>Action</th>
           </tr>
             
         </thead>
@@ -105,10 +105,9 @@ let sommeDesEntres=0;
     {datas.map((dat, index) => (
        
       <tr  key={index}>
-        <td>{dat.data_de_tansaction}</td>
-        <td>{dat.Provenence}</td>
-        <td>{dat.Montant}$</td>
-        <td>{dat.Action}</td>
+        <td>{dat.data}</td>
+        <td>{dat.designation}</td>
+        <td>{dat.montant}$</td>
       </tr>
      
     ))}
@@ -120,4 +119,4 @@ let sommeDesEntres=0;
   )
 }
 
-export default LesEntres
+export default TableauDesSorties

@@ -12,6 +12,9 @@ import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
 function LesSorties() {
     const navigate=useNavigate()
+    const handleAcceuil=()=>{
+        navigate("/")
+      }
     const handleEntre=()=>{
         navigate("/entre")
      } 
@@ -33,7 +36,18 @@ function LesSorties() {
 
   return (
    <><div className='div_one'>
-   <nav><Box><Menucomponent /></Box></nav>
+   <nav><Box>
+    <Button
+        sx={{color:"white"}}
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleAcceuil}
+      >
+        Acceuil
+      </Button>
+        </Box></nav>
    <nav><Box><TableauResultat /></Box></nav>
    <nav><Box>
    <Button

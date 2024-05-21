@@ -7,7 +7,8 @@ import Inscription from './Pages/Inscription/Inscription.jsx'
 import LesEntres from './Pages/ComponentPages/LesEntres.jsx'
 import { Toaster } from 'react-hot-toast'
 import LesSorties from './Pages/ComponentPages/LesSorties.jsx'
-
+import TableauDesSorties from './Pages/ComponentPages/TableauDesSorties.jsx'
+import UtilisateurPage from './Pages/ComponentPages/UtilisateurPage.jsx'
 
 
 const routes=createBrowserRouter([
@@ -30,7 +31,16 @@ const routes=createBrowserRouter([
   {
     path:"/sorties",
     element:<LesSorties />
+  },
+  {
+    path:"/tableaudessorties",
+    element:<TableauDesSorties />
+  },
+  {
+    path:"/pageutilisateur",
+    element:<UtilisateurPage />
   }
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

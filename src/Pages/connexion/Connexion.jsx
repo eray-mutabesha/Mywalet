@@ -4,16 +4,16 @@ import { useForm} from "react-hook-form"
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import { useEffect } from 'react';
+ import { useEffect } from 'react';
 
 
 function Connexion() {   
     const navigate=useNavigate();
-    //  useEffect(()=>{
-    //   if(localStorage.getItem("Utilisateur")){
-    //       navigate("/");
-    //     }
-    //   })
+      useEffect(()=>{
+       if(localStorage.getItem("Utilisateur")){
+          navigate("/");
+         }
+       })
     const { register, handleSubmit,formState:{errors} } = useForm();
     const onSubmit=(data)=>{
      
@@ -21,7 +21,7 @@ function Connexion() {
      axios.get(`http://localhost:3000/Utilisateur?Email=${data.Email}&mot_depasse=${data.mot_depasse}`).then((res)=>{
       if(res.data.length > 0){
          //inserssion des donnes dans le local storage
-        // localStorage.setItem("Utilisateur", JSON.stringify(res.data[0]))
+        localStorage.setItem("Utilisateur", JSON.stringify(res.data[0]))
         toast.success("Connexion reussi");
         navigate("/");
       }

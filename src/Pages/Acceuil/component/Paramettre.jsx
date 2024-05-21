@@ -2,17 +2,21 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-
+import { useNavigate } from 'react-router-dom';
 export default function Paramettre() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate=useNavigate();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const handUtilisateur =()=>{
+   navigate("/pageutilisateur")
+  }
   return (
     <div>
       <Button
@@ -34,7 +38,7 @@ export default function Paramettre() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Utilisateur</MenuItem>
+        <MenuItem onClick={handUtilisateur}>Utilisateur</MenuItem>
         <MenuItem onClick={handleClose}>Deconnexion</MenuItem>
       </Menu>
     </div>

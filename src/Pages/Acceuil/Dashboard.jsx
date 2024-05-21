@@ -8,14 +8,18 @@ import MonCompt from './component/MonCompt'
 import Paramettre from './component/Paramettre'
 import Sorties from './component/Sorties'
 import { useNavigate } from 'react-router-dom'
-import { Stack,Box,Button,Link,TextField} from '@mui/material'
+import { Stack,Box,Button,Link,TextField, Typography} from '@mui/material'
 import { useForm} from "react-hook-form"
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
+import { useEffect } from 'react'
 
 function Dashboard() {
   const { register, handleSubmit,reset,formState:{errors} } = useForm();
   const navigate= useNavigate();
+  const handleAcceuil=()=>{
+    navigate("/")
+  }
   const handleEntre=()=>{
      navigate("/entre")
   } 
@@ -32,12 +36,27 @@ function Dashboard() {
     toast.err("Il a une erreur")
   })
  }
-
+useEffect(()=>{
+  if(!localStorage.getItem("Utilisateur")){
+    navigate("/connexion");
+   }
+})
 
   return (
     <>
     <div className='div_one'>
-    <nav><Box><Menucomponent /></Box></nav>
+    <nav><Box>
+    <Button
+        sx={{color:"white"}}
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleAcceuil}
+      >
+        Acceuil
+      </Button>
+        </Box></nav>
     <nav><Box><TableauResultat /></Box></nav>
     <nav><Box>
     <Button
@@ -73,7 +92,7 @@ function Dashboard() {
     <div className='div_two'>
       <nav className='form_nav'>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>Dépôt d'argent</h1>
+        <Typography variant="h5">Dépôt d'argent</Typography>
         <br></br>
         <Box sx={{
             display:"grid",
