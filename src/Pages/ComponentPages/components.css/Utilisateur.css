@@ -1,0 +1,44 @@
+section{
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px;
+    background-color: rgba(255, 255, 255, 0.644);
+    margin-top: 20vh;
+}
+section div img{
+  width: 250px;
+  height: 250px;
+  object-fit:fill;
+  
+}
+.informations_user{
+    display: grid;
+    gap: 30px;
+}
+.identities nav p{
+    padding: 5px;
+    
+}
+.identities nav p span{
+    /* border: 1px solid black; */
+    padding: 5px;
+    border-radius: 5px;
+    /* margin: 10px; */
+}
+.identities nav{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.253);
+    margin: 10px;
+    border-radius: 5px;
+}
+.identities nav img{
+    width: 20px;
+    height: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
