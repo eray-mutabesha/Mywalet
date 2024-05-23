@@ -15,6 +15,7 @@ import { useEffect,useState } from 'react';
 
 function UtilisateurPage() {
     const navigate=useNavigate()
+   
     const [datas,setdatas]=useState([])
     const handleAcceuil=()=>{
         navigate("/")
@@ -39,7 +40,7 @@ function UtilisateurPage() {
       
       getData();
     },[])
-    console.log(datas.nom)
+  
   return (
     <>
     <div className='div_one'>
@@ -95,14 +96,15 @@ function UtilisateurPage() {
       <div className='informations_user'>
           <div className='administrateur'>
             <h2>Administrateur</h2>
-            <p><strong>Email:</strong><span>eraymutabesha@gmail.com</span></p>
+            <p><strong>Email:</strong><span>{datas[0].Email}</span></p>
           </div>
           <div className='identities'>
-            <nav><p><strong>Nom:</strong><span>{datas.nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Post-Nom:</strong><span>Mutabesha</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Genre:</strong><span>masculin</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Statut:</strong><span>celibataire</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Nom:</strong><span>{datas[0].nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Post-Nom:</strong><span>{datas[0].post_nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Genre:</strong><span>{datas[0].Genre}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Statut:</strong><span>{datas[0].Statut}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
             <nav><p><strong>Action:</strong><span>une action</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Mot de passe:</strong><span>{datas[0].mot_depasse}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
           </div>
       </div>
     </section>
