@@ -38,7 +38,7 @@ useEffect(()=>{
   
   getData();
 },[])
-let sommeDesEntres=0;
+
 
   
     

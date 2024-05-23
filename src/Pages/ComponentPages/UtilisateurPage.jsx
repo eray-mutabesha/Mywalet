@@ -11,16 +11,35 @@ import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
 import './components.css/Utilisateur.css'
-
+import { useEffect,useState } from 'react';
 
 function UtilisateurPage() {
     const navigate=useNavigate()
+    const [datas,setdatas]=useState([])
     const handleAcceuil=()=>{
         navigate("/")
       }
     const handleEntre=()=>{
         navigate("/entre")
      } 
+
+     useEffect(()=>{
+      const getData = async () => {
+        
+        try {
+          // Fetch posts data
+          const data = await axios.get('http://localhost:3000/Utilisateur');
+          setdatas(data.data);
+      
+          
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      
+      getData();
+    },[])
+    console.log(datas.nom)
   return (
     <>
     <div className='div_one'>
@@ -79,7 +98,7 @@ function UtilisateurPage() {
             <p><strong>Email:</strong><span>eraymutabesha@gmail.com</span></p>
           </div>
           <div className='identities'>
-            <nav><p><strong>Nom:</strong><span>Eray</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Nom:</strong><span>{datas.nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
             <nav><p><strong>Post-Nom:</strong><span>Mutabesha</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
             <nav><p><strong>Genre:</strong><span>masculin</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
             <nav><p><strong>Statut:</strong><span>celibataire</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
