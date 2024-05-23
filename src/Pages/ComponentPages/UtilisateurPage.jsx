@@ -12,6 +12,7 @@ import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
 import './components.css/Utilisateur.css'
 import { useEffect,useState } from 'react';
+import { isEmpty } from '../../Outils';
 
 function UtilisateurPage() {
     const navigate=useNavigate()
@@ -96,15 +97,15 @@ function UtilisateurPage() {
       <div className='informations_user'>
           <div className='administrateur'>
             <h2>Administrateur</h2>
-            <p><strong>Email:</strong><span>{datas[0].Email}</span></p>
+            <p><strong>Email:</strong><span>{!isEmpty(datas)&&datas[0].Email}</span></p>
           </div>
           <div className='identities'>
-            <nav><p><strong>Nom:</strong><span>{datas[0].nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Post-Nom:</strong><span>{datas[0].post_nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Genre:</strong><span>{datas[0].Genre}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Statut:</strong><span>{datas[0].Statut}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Nom:</strong><span>{!isEmpty(datas)&&datas[0].nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Post-Nom:</strong><span>{!isEmpty(datas)&&datas[0].post_nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Genre:</strong><span>{!isEmpty(datas)&&datas[0].Genre}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Statut:</strong><span>{!isEmpty(datas)&&datas[0].Statut}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
             <nav><p><strong>Action:</strong><span>une action</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Mot de passe:</strong><span>{datas[0].mot_depasse}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Mot de passe:</strong><span>{!isEmpty(datas)&&datas[0].mot_depasse}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
           </div>
       </div>
     </section>
