@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast'
 import LesSorties from './Pages/ComponentPages/LesSorties.jsx'
 import TableauDesSorties from './Pages/ComponentPages/TableauDesSorties.jsx'
 import UtilisateurPage from './Pages/ComponentPages/UtilisateurPage.jsx'
+import Deconnexion from './Pages/ComponentPages/Deconnexion.jsx'
 
 
 const routes=createBrowserRouter([
@@ -39,8 +40,11 @@ const routes=createBrowserRouter([
   {
     path:"/pageutilisateur",
     element:<UtilisateurPage />
+  },
+  {
+   path:"/deconnexion",
+   element:<Deconnexion />
   }
-
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

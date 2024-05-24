@@ -3,6 +3,9 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
+
+
+
 export default function Paramettre() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -11,8 +14,8 @@ export default function Paramettre() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleDeconnexion = () => {
+    navigate("/deconnexion")
   };
   const handUtilisateur =()=>{
    navigate("/pageutilisateur")
@@ -33,13 +36,12 @@ export default function Paramettre() {
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
       >
         <MenuItem onClick={handUtilisateur}>Utilisateur</MenuItem>
-        <MenuItem onClick={handleClose}>Deconnexion</MenuItem>
+        <MenuItem onClick={handleDeconnexion}>Deconnexion</MenuItem>
       </Menu>
     </div>
   );
