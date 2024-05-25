@@ -4,6 +4,7 @@ import './components.css/Deconnexion.css'
 import { useNavigate } from 'react-router-dom'
 
 function Deconnexion() {
+    // deconnexion page
     const navigate=useNavigate();
     const handleAcceuil=()=>{
      navigate("/")
