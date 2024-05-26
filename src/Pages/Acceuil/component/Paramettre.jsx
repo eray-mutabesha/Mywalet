@@ -21,6 +21,7 @@ export default function Paramettre() {
    navigate("/pageutilisateur")
   }
   return (
+    // parameter page
     <div>
       <Button
         sx={{color:"white"}}
