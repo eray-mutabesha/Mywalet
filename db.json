@@ -19,6 +19,26 @@
       "Email": "daniel@gmail.com",
       "mot_depasse": "2222222",
       "confirm_mot_depasse": "2222222"
+    },
+    {
+      "id": "5573",
+      "nom": "muhindo",
+      "post_nom": "mussa",
+      "Genre": "masculain",
+      "Statut": "celibataire",
+      "Email": "muhindo@gmail.com",
+      "mot_depasse": "12345678",
+      "confirm_mot_depasse": "12345678"
+    },
+    {
+      "id": "9f3a",
+      "nom": "murhira",
+      "post_nom": "mussamba",
+      "Genre": "masculain",
+      "Statut": "celibataire",
+      "Email": "murhira@gmail.com",
+      "mot_depasse": "11111111",
+      "confirm_mot_depasse": "11111111"
     }
   ],
   "LesEntres": [

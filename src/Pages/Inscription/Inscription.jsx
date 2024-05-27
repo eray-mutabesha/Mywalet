@@ -29,6 +29,7 @@ function Inscription() {
             else{
               // API de la base des donnes pour stocker les infos de l'utilisateur 
           axios.post("http://localhost:3000/Utilisateur",data).then((res)=>{
+            localStorage.setItem("Utilisateur", JSON.stringify(res.data[0]))
             console.log(res)
             toast.success("Inscription reussie")
             navigate("/")
