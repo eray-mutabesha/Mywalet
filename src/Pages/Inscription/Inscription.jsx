@@ -6,10 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-
-
 function Inscription() {
-    
     const navigate=useNavigate();
       useEffect(()=>{
        if(localStorage.getItem("Utilisateur")){
@@ -39,8 +36,6 @@ function Inscription() {
           })
             }
           })
-          
-        
         }
     }
   return (
