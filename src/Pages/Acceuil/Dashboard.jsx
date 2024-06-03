@@ -67,7 +67,7 @@ useEffect(()=>{
         aria-expanded={open ? 'true' : undefined}
         onClick={handleEntre}
       >
-        Les entres
+        LES ENTRÉES
       </Button>
     </Box></nav>
     <nav><Box>

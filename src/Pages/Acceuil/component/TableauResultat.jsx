@@ -23,7 +23,7 @@ export default function TableauResultat() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Tableau des resultas
+        TRÉSORERIE
       </Button>
       <Menu
         id="basic-menu"
