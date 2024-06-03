@@ -13,6 +13,7 @@ import { useForm} from "react-hook-form"
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useEffect } from 'react'
+import Projet from './component/Projet'
 
 function Dashboard() {
   const { register, handleSubmit,reset,formState:{errors} } = useForm();
@@ -73,18 +74,7 @@ useEffect(()=>{
     <nav><Box>
     <Sorties />
     </Box></nav>
-    <nav><Box>
-    <Button
-        sx={{color:"white"}}
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-     
-      >
-        Projets
-      </Button>
-    </Box></nav>
+    <nav><Projet/></nav>
     <nav><MonCompt/></nav>
     <nav><Paramettre /></nav>
     </div>
