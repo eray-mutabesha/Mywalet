@@ -1,5 +1,5 @@
 {
-  "Utilisateur": [
+  "insert_utilisateur": [
     {
       "id": "716c",
       "nom": "eray",
@@ -39,6 +39,16 @@
       "Email": "murhira@gmail.com",
       "mot_depasse": "11111111",
       "confirm_mot_depasse": "11111111"
+    },
+    {
+      "id": "a8b6",
+      "nom": "erayy",
+      "post_nom": "mutabesha",
+      "Genre": "masculain",
+      "Statut": "celibataire",
+      "Email": "erayy@gmail.com",
+      "mot_depasse": "12345678",
+      "confirm_mot_depasse": "12345678"
     }
   ],
   "LesEntres": [

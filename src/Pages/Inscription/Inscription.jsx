@@ -6,7 +6,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
+
 function Inscription() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
     const navigate=useNavigate();
       useEffect(()=>{
        if(localStorage.getItem("Utilisateur")){
@@ -18,14 +20,11 @@ function Inscription() {
         if(data.mot_depasse !== data.confirm_mot_depasse){
               toast.error("les mots de passes ne sont pas identique")
         }else{
-          // verification de l'existence de l'utilisateure apartire de son adress mail
-          axios.get(`http://localhost:3000/Utilisateur?Email=${data.Email}`).then((res)=>{
-            if(res.data.length > 0){
-              toast.error("L'utilisateur exist deja")
-            }
-            else{
+          
               // API de la base des donnes pour stocker les infos de l'utilisateur 
-          axios.post("http://localhost:3000/Utilisateur",data).then((res)=>{
+          axios.post(`${BASE_URL}/insert_utilisateur`,data)
+          .then(({data})=>{
+            console.log(data)
             localStorage.setItem("Utilisateur", JSON.stringify(res.data[0]))
             console.log(res)
             toast.success("Inscription reussie")
@@ -34,8 +33,7 @@ function Inscription() {
             console.log(err)
             toast.err("Il a une erreur")
           })
-            }
-          })
+            
         }
     }
   return (
