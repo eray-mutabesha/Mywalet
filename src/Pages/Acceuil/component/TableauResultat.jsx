@@ -12,7 +12,9 @@ export default function TableauResultat() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+const handltresoreries = () =>{
+  
+}
   return (
     <div>
       <Button
@@ -34,9 +36,9 @@ export default function TableauResultat() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Les enteres</MenuItem>
-        <MenuItem onClick={handleClose}>les sorties</MenuItem>
-        <MenuItem onClick={handleClose}>Difference</MenuItem>
+        <MenuItem onClick={handltresoreries}>Enregister une operation</MenuItem>
+        <MenuItem onClick={handleClose}>Liste des operations</MenuItem>
+
         
       </Menu>
     </div>

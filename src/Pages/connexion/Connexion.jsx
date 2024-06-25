@@ -18,7 +18,7 @@ function Connexion() {
     const onSubmit=(data)=>{
      
      // verification de l'existence de l'utilisateure apartire de son adress mail  et son mot de passe
-     axios.get(`http://localhost:3000/Utilisateur?Email=${data.Email}&mot_depasse=${data.mot_depasse}`).then((res)=>{
+     axios.get(`http://localhost:3000/insert_utilisateur?Email=${data.Email}&mot_depasse=${data.mot_depasse}`).then((res)=>{
       if(res.data.length > 0){
          //inserssion des donnes dans le local storage
         localStorage.setItem("Utilisateur", JSON.stringify(res.data[0]))

@@ -25,23 +25,30 @@ function Dashboard() {
      navigate("/entre")
   } 
 
- const onSubmit=(data)=>{
-  // gateway pour les entre 
-  axios.post("http://localhost:3000/LesEntres",data).then((res)=>{
-    console.log(res)
-    toast.success("Depot reussie")
-    reset()
-    
-  }).catch((err)=>{
-    console.log(err)
-    toast.err("Il a une erreur")
-  })
- }
+const onSubmit=(data)=>{
+     // API de la base des donnes pour stocker les infos des entres 
+    axios.post(`${BASE_URL}/insert_entres`,data)
+    .then(({data})=>{
+      console.log(data)
+      localStorage.setItem("lesEntres", JSON.stringify(res.data[0]))
+      console.log(res)
+      toast.success("Depot reussie")
+      reset()
+    }).catch((err)=>{
+      console.log(err)
+      toast.err("Il a une erreur")
+    })
+      
+  
+}
+
 useEffect(()=>{
   if(!localStorage.getItem("Utilisateur")){
     navigate("/connexion");
    }
 })
+
+
 
   return (
     <>
@@ -112,6 +119,7 @@ useEffect(()=>{
 
   
         </Box>
+        
         <Box sx={{
           
           display:"flex",

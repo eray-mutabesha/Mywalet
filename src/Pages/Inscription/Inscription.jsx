@@ -20,8 +20,7 @@ function Inscription() {
         if(data.mot_depasse !== data.confirm_mot_depasse){
               toast.error("les mots de passes ne sont pas identique")
         }else{
-          
-              // API de la base des donnes pour stocker les infos de l'utilisateur 
+           // API de la base des donnes pour stocker les infos de l'utilisateur 
           axios.post(`${BASE_URL}/insert_utilisateur`,data)
           .then(({data})=>{
             console.log(data)

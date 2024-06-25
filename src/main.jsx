@@ -12,6 +12,9 @@ import UtilisateurPage from './Pages/ComponentPages/UtilisateurPage.jsx'
 import Deconnexion from './Pages/ComponentPages/Deconnexion.jsx'
 import Projets from './Pages/ComponentPages/Projets.jsx'
 import TableaudesProjets from './Pages/ComponentPages/TableaudesProjets.jsx'
+import Tresoreries from './Pages/ComponentPages/Tresoreries.jsx'
+
+
 
 // routes
 const routes=createBrowserRouter([
@@ -54,6 +57,10 @@ const routes=createBrowserRouter([
    {
     path:"/tableaudesprojet",
     element:<TableaudesProjets />
+   },
+   {
+    path:"/tresoreries",
+    element:<Tresoreries/>
    }
 ])
 
