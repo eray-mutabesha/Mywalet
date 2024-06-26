@@ -10,6 +10,10 @@ import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 function Tresoreries() {
@@ -34,7 +38,11 @@ function Tresoreries() {
         })
        }
 
+       const [age, setAge] = React.useState('');
 
+       const handleChange = (event) => {
+         setAge(event.target.value);
+       };
 
   return (
    <><div className='div_one'>
@@ -103,9 +111,25 @@ function Tresoreries() {
          {...register("designation", { required:"Veillez entrez une designation"})}/>
           {errors.designation&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
-        <TextField id="date" label="" variant="outlined" type="date" fullWidth size='small' 
-         {...register("data", { required:"Veillez entrez la date"})}/>
-          {errors.mot_depasse&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+       
+
+          <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Compte</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Airtel money</MenuItem>
+          <MenuItem value={20}>Orange Money</MenuItem>
+          <MenuItem value={30}>PayPal</MenuItem>
+        </Select>
+      </FormControl>
+        {errors.type_de_compte&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+
+
 
           <TextField id="montant" label="Montant" variant="outlined" type="number" fullWidth size='small' 
          {...register("montant", { required:"Veillez entrez la montant"})}/>
@@ -114,7 +138,6 @@ function Tresoreries() {
   
         </Box>
         <Box sx={{
-          
           display:"flex",
           justifyContent: "space-between"
         }}>
