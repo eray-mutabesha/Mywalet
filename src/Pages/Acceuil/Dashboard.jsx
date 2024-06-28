@@ -16,6 +16,7 @@ import { useEffect } from 'react'
 import Projet from './component/Projet'
 
 function Dashboard() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
   const { register, handleSubmit,reset,formState:{errors} } = useForm();
   const navigate= useNavigate();
   const handleAcceuil=()=>{
@@ -30,13 +31,12 @@ const onSubmit=(data)=>{
     axios.post(`${BASE_URL}/insert_entres`,data)
     .then(({data})=>{
       console.log(data)
-      localStorage.setItem("lesEntres", JSON.stringify(res.data[0]))
-      console.log(res)
+    
       toast.success("Depot reussie")
-      reset()
+    
     }).catch((err)=>{
       console.log(err)
-      toast.err("Il a une erreur")
+      toast.error("Il a une erreur")
     })
       
   

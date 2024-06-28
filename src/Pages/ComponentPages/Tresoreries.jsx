@@ -10,13 +10,11 @@ import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
 
 
 function Tresoreries() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
     const navigate=useNavigate()
     const handleAcceuil=()=>{
         navigate("/")
@@ -24,26 +22,18 @@ function Tresoreries() {
     const handleEntre=()=>{
         navigate("/entre")
      } 
-    const { register, handleSubmit,reset,formState:{errors} } = useForm();
+    const { register, handleSubmit,formState:{errors} } = useForm();
     const onSubmit=(data)=>{
-        // gateway pour enregistrer les sorties 
-        axios.post("http://localhost:3000/sorties",data).then((res)=>{
-          console.log(res)
-          toast.success("Retrait d'argent effectuer")
-          reset()
+        // API de la base des donnes pour stocker les infos du tresoreries s
+        axios.post(`${BASE_URL}/insert_tresoreries`,data)
+        .then(({data})=>{
+          console.log(data)
           
-        }).catch((err)=>{
-          console.log(err)
-          toast.err("Il a une erreur")
+          toast.success("reussie")
         })
        }
 
-       const [age, setAge] = React.useState('');
-
-       const handleChange = (event) => {
-         setAge(event.target.value);
-       };
-
+      
   return (
    <><div className='div_one'>
    <nav><Box>
@@ -99,7 +89,7 @@ function Tresoreries() {
             padding:3
         }}>
         <Typography variant="h5">
-          Faire un retrait
+          Enregistrer une operation
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{
@@ -112,22 +102,11 @@ function Tresoreries() {
           {errors.designation&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
        
+          <TextField id="filled-basic" label="Designation" variant="outlined" type="text" fullWidth size='small' 
+         {...register("type_de_compte", { required:"Veillez entrez une designation"})}/>
+          {errors.type_de_compte&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
-          <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Compte</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Airtel money</MenuItem>
-          <MenuItem value={20}>Orange Money</MenuItem>
-          <MenuItem value={30}>PayPal</MenuItem>
-        </Select>
-      </FormControl>
-        {errors.type_de_compte&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+      
 
 
 
