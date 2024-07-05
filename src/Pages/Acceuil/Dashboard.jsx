@@ -95,6 +95,7 @@ useEffect(()=>{
             display:"grid",
             gap:2
         }}>
+
   
         <TextField id="filled-basic"  variant="outlined" type="date" fullWidth size='small' 
          {...register("data_de_tansaction", { required:"Veillez entrez la date de transaction"})}/>
@@ -116,6 +117,8 @@ useEffect(()=>{
          {...register("Action", { required:"Veillez entrez l'action ",minLength:{required:
             "Veillez entrez l'action"
          }})}/>
+
+
 
   
         </Box>

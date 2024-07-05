@@ -10,7 +10,12 @@ import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
+
+
+
+
 function Projets() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
     const navigate=useNavigate()
     const handleAcceuil=()=>{
         navigate("/")
@@ -18,17 +23,17 @@ function Projets() {
     const handleEntre=()=>{
         navigate("/entre")
      } 
-    const { register, handleSubmit,reset,formState:{errors} } = useForm();
+    const { register, handleSubmit,formState:{errors} } = useForm();
     const onSubmit=(data)=>{
         // gateway pour enregistrer les sorties 
-        axios.post("http://localhost:3000/sorties",data).then((res)=>{
-          console.log(res)
-          toast.success("Retrait d'argent effectuer")
-          reset()
+        axios.post(`${BASE_URL}/insert_project`,data).then((res)=>{
+          console.log(data)
+          toast.success("projet enregistrer")
+        
           
         }).catch((err)=>{
           console.log(err)
-          toast.err("Il a une erreur")
+          toast.error("Il a une erreur")
         })
        }
 
@@ -101,21 +106,23 @@ function Projets() {
          {...register("designation", { required:"Veillez entrez une designation"})}/>
           {errors.designation&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
-        <TextField id="date" label="" variant="outlined" type="date" fullWidth size='small' 
-         {...register("data", { required:"Veillez entrez la date"})}/>
-          {errors.mot_depasse&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+       
 
           <TextField id="date" label="date debut" variant="outlined" type="date" fullWidth size='small' 
-         {...register("data", { required:"Veillez entrez la date"})}/>
-          {errors.mot_depasse&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+         {...register("date_debut", { required:"Veillez entrez la date"})}/>
+          {errors.date_debut&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+
+
 
           <TextField id="date" label="date fin" variant="outlined" type="date" fullWidth size='small' 
-         {...register("data", { required:"Veillez entrez la date"})}/>
-          {errors.mot_depasse&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+         {...register("date_fin", { required:"Veillez entrez la date"})}/>
+          {errors.date_fin&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+
+
 
           <TextField id="montant" label="Montant" variant="outlined" type="number" fullWidth size='small' 
          {...register("montant", { required:"Veillez entrez la montant"})}/>
-          {errors.mot_depasse&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+          {errors.montant&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
           
 

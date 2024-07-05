@@ -14,9 +14,31 @@ import './components.css/Utilisateur.css'
 import { useEffect,useState } from 'react';
 import { isEmpty } from '../../Outils';
 
+
+
 function UtilisateurPage() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
     const navigate=useNavigate()
+
+  const deletefuction= ()=>{
+
    
+       // API de la base des donnes pour stocker les infos de l'utilisateur 
+       axios.delete(`${BASE_URL}/deleteUtilisateurData`)
+       .then(()=>{
+         
+         toast.success("supression reussie")
+        
+       }).catch((err)=>{
+         console.log(err)
+         toast.err("Il a une erreur")
+       })
+   
+
+  }
+
+
+
     const [datas,setdatas]=useState([])
     const handleAcceuil=()=>{
         navigate("/")
@@ -30,12 +52,19 @@ function UtilisateurPage() {
         
         try {
           // Fetch posts data
-          const data = await axios.get('http://localhost:3000/Utilisateur');
-          setdatas(data.data);
-      
+          const data = await fetch(`${BASE_URL}/getUtilisateurData`,{
+            method:'GET',
+
+          });
+
+         const res= await data.json();
+         if(res.data){
+          setdatas(res.data);
+         }
           
-        } catch (error) {
-          console.error('Error fetching data:', error);
+        } 
+        catch(error){
+          console.log("ERROR",error)
         }
       };
       
@@ -44,7 +73,7 @@ function UtilisateurPage() {
   
   return (
     <>
-    <div className='div_one'>
+    <div className='div_one'> 
    <nav><Box>
     <Button
         sx={{color:"white"}}
@@ -97,15 +126,16 @@ function UtilisateurPage() {
       <div className='informations_user'>
           <div className='administrateur'>
             <h2>Administrateur</h2>
-            <p><strong>Email:</strong><span>{!isEmpty(datas)&&datas[0].Email}</span></p>
+            <p><strong>Email:</strong><span>{!isEmpty(datas)&&datas[0].email}</span></p>
+            <p>Supprimer le compte</p>
+            <img onClick={deletefuction} src='public\deleteimage.png'/>
           </div>
           <div className='identities'>
-            <nav><p><strong>Nom:</strong><span>{!isEmpty(datas)&&datas[0].nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Post-Nom:</strong><span>{!isEmpty(datas)&&datas[0].post_nom}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Genre:</strong><span>{!isEmpty(datas)&&datas[0].Genre}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Statut:</strong><span>{!isEmpty(datas)&&datas[0].Statut}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Nom:</strong><span>{!isEmpty(datas)&&datas[0].name}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Genre:</strong><span>{!isEmpty(datas)&&datas[0].gender}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Statut:</strong><span>{!isEmpty(datas)&&datas[0].statut}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
             <nav><p><strong>Action:</strong><span>une action</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
-            <nav><p><strong>Mot de passe:</strong><span>{!isEmpty(datas)&&datas[0].mot_depasse}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
+            <nav><p><strong>Mot de passe:</strong><span>{!isEmpty(datas)&&datas[0].password }</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>
           </div>
       </div>
     </section>

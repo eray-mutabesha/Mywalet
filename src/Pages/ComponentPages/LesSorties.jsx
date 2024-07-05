@@ -11,6 +11,7 @@ import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
 function LesSorties() {
+    const BASE_URL = import.meta.env.VITE_API_URL;
     const navigate=useNavigate()
     const handleAcceuil=()=>{
         navigate("/")
@@ -18,13 +19,13 @@ function LesSorties() {
     const handleEntre=()=>{
         navigate("/entre")
      } 
-    const { register, handleSubmit,reset,formState:{errors} } = useForm();
+    const { register, handleSubmit,formState:{errors} } = useForm();
     const onSubmit=(data)=>{
-        // gateway pour enregistrer les sorties 
-        axios.post("http://localhost:3000/sorties",data).then((res)=>{
-          console.log(res)
+        //  pour enregistrer les sorties 
+        axios.post(`${BASE_URL}/insert_sorties`,data).then((res)=>{
+          console.log(data)
           toast.success("Retrait d'argent effectuer")
-          reset()
+          
           
         }).catch((err)=>{
           console.log(err)
@@ -97,17 +98,26 @@ function LesSorties() {
             gap:2
         }}>
   
-        <TextField id="filled-basic" label="Designation" variant="outlined" type="text" fullWidth size='small' 
-         {...register("designation", { required:"Veillez entrez une designation"})}/>
-          {errors.designation&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+       <TextField id="filled-basic"  variant="outlined" type="date" fullWidth size='small' 
+         {...register("data_de_tansaction", { required:"Veillez entrez la date de transaction"})}/>
+          {errors.data_de_tansaction&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
-        <TextField id="date" label="" variant="outlined" type="date" fullWidth size='small' 
-         {...register("data", { required:"Veillez entrez la date"})}/>
-          {errors.mot_depasse&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+        <TextField id="filled-basic" label="Provenence" variant="outlined" type="text" fullWidth size='small' 
+         {...register("Provenence", { required:"Veillez entrez la provenence",minLength:{required:
+            "Veillez entrez le provenence"
+         }})}/>
+          {errors.Provenence&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
-          <TextField id="montant" label="Montant" variant="outlined" type="number" fullWidth size='small' 
-         {...register("montant", { required:"Veillez entrez la montant"})}/>
-          {errors.mot_depasse&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+          <TextField id="filled-basic" label="Montant" variant="outlined" type="number" fullWidth size='small' 
+         {...register("Montant", { required:"Veillez entrez le montant",minLength:{required:
+            "Veillez entrez le montant"
+         }})}/>
+          {errors.Montant&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+
+          <TextField id="filled-basic" label="Action" variant="outlined" type="text" fullWidth size='small' 
+         {...register("Action", { required:"Veillez entrez l'action ",minLength:{required:
+            "Veillez entrez l'action"
+         }})}/>
 
   
         </Box>
