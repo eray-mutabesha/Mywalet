@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
@@ -17,7 +17,10 @@ import Projet from './component/Projet'
 
 function Dashboard() {
   const BASE_URL = import.meta.env.VITE_API_URL;
-  const { register, handleSubmit,reset,formState:{errors} } = useForm();
+  const { register, handleSubmit,formState:{errors} } = useForm();
+  const { onChange} = register('select'); 
+
+  const [tresorerieOptions, settresorerieOptions] = useState([]);
   const navigate= useNavigate();
   const handleAcceuil=()=>{
     navigate("/")
@@ -26,13 +29,22 @@ function Dashboard() {
      navigate("/entre")
   } 
 
+
+
+
+
 const onSubmit=(data)=>{
      // API de la base des donnes pour stocker les infos des entres 
     axios.post(`${BASE_URL}/insert_entres`,data)
     .then(({data})=>{
-      console.log(data)
+      if (data.status == 500) {
+        toast.error("Il a une erreur")
+      } else {
+        console.log(data)
     
-      toast.success("Depot reussie")
+        toast.success("Depot reussie")
+      }
+      
     
     }).catch((err)=>{
       console.log(err)
@@ -42,11 +54,24 @@ const onSubmit=(data)=>{
   
 }
 
+const tresorerieOptionsFn =() =>{
+  axios.get(`${BASE_URL}/getTresorerieOptions`)
+    .then(({data})=>{
+      console.log(data)
+    
+      settresorerieOptions(data.data)
+    }).catch((err)=>{
+      console.log(err)
+      toast.error("Il a une erreur")
+    })
+}
+
 useEffect(()=>{
+  tresorerieOptionsFn();
   if(!localStorage.getItem("Utilisateur")){
     navigate("/connexion");
    }
-})
+},[])
 
 
 
@@ -117,10 +142,20 @@ useEffect(()=>{
          {...register("Action", { required:"Veillez entrez l'action ",minLength:{required:
             "Veillez entrez l'action"
          }})}/>
+         {/*  onChange={(e)=>setForm({...form, tresoreriesID: e.target.value})}*/}
+
+         <select name="" id="" onChange={onChange}  {...register("select", { required:"Veillez entrez l'action "})}>
+            <option value="">select tresoreri</option>
+            {tresorerieOptions.map((item,index)=>(
+              <option key={index} value={item.id}>{item.designation}</option>
+            ))}
+            
+          </select>
+
+         
 
 
 
-  
         </Box>
         
         <Box sx={{

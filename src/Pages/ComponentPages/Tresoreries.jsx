@@ -102,7 +102,7 @@ function Tresoreries() {
           {errors.designation&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
        
-          <TextField id="filled-basic" label="Designation" variant="outlined" type="text" fullWidth size='small' 
+          <TextField id="filled-basic" label="Numero du compte" variant="outlined" type="text" fullWidth size='small' 
          {...register("type_de_compte", { required:"Veillez entrez une designation"})}/>
           {errors.type_de_compte&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
@@ -113,6 +113,8 @@ function Tresoreries() {
           <TextField id="montant" label="Montant" variant="outlined" type="number" fullWidth size='small' 
          {...register("montant", { required:"Veillez entrez la montant"})}/>
           {errors.mot_depasse&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+
+         
 
   
         </Box>

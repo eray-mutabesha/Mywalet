@@ -8,10 +8,20 @@ import TableauResultat from '../Acceuil/component/TableauResultat'
 import MonCompt from '../Acceuil/component/MonCompt'
 import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
-import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
+import { useState,useEffect } from 'react';
+
+
+
+
+
+
+
+
 function LesSorties() {
     const BASE_URL = import.meta.env.VITE_API_URL;
+    const [tresorerieOptions, settresorerieOptions] = useState([]);
+    
     const navigate=useNavigate()
     const handleAcceuil=()=>{
         navigate("/")
@@ -20,17 +30,40 @@ function LesSorties() {
         navigate("/entre")
      } 
     const { register, handleSubmit,formState:{errors} } = useForm();
-    const onSubmit=(data)=>{
-        //  pour enregistrer les sorties 
-        axios.post(`${BASE_URL}/insert_sorties`,data).then((res)=>{
+    const { onChange} = register('select'); 
+    const tresorerieOptionsFn =() =>{
+      axios.get(`${BASE_URL}/getTresorerieOptions`)
+        .then(({data})=>{
           console.log(data)
-          toast.success("Retrait d'argent effectuer")
-          
-          
+        
+          settresorerieOptions(data.data)
         }).catch((err)=>{
           console.log(err)
-          toast.err("Il a une erreur")
+          toast.error("Il a une erreur")
         })
+    }
+    
+    useEffect(()=>{
+      tresorerieOptionsFn();
+    },[])
+
+
+    const onSubmit=(data)=>{
+        //  pour enregistrer les sorties 
+        axios.post(`${BASE_URL}/insert_sorties`,data)
+       .then(({data})=>{
+      if (data.status == 500) {
+        toast.error("Il a une erreur")
+      } else {
+        console.log(data)
+    
+        toast.success("sotie reussie")
+      }
+      
+    }).catch((err)=>{
+      console.log(err)
+      toast.error("Il a une erreur")
+    })
        }
 
 
@@ -118,7 +151,13 @@ function LesSorties() {
          {...register("Action", { required:"Veillez entrez l'action ",minLength:{required:
             "Veillez entrez l'action"
          }})}/>
-
+        <select name="" id="" onChange={onChange}  {...register("select", { required:"Veillez entrez l'action "})}>
+            <option value="">select tresorerie</option>
+            {tresorerieOptions.map((item,index)=>(
+              <option key={index} value={item.id}>{item.designation}</option>
+            ))}
+            
+          </select>
   
         </Box>
         <Box sx={{

@@ -13,7 +13,7 @@ import Deconnexion from './Pages/ComponentPages/Deconnexion.jsx'
 import Projets from './Pages/ComponentPages/Projets.jsx'
 import TableaudesProjets from './Pages/ComponentPages/TableaudesProjets.jsx'
 import Tresoreries from './Pages/ComponentPages/Tresoreries.jsx'
-
+import TableauTresoreries from './Pages/ComponentPages/TableauTresoreries.jsx'
 
 
 // routes
@@ -61,6 +61,10 @@ const routes=createBrowserRouter([
    {
     path:"/tresoreries",
     element:<Tresoreries/>
+   },
+   {
+    path:"/tresoreriesTableau",
+    element:<TableauTresoreries/>
    }
 ])
 

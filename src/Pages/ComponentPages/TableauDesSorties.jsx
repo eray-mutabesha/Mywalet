@@ -1,4 +1,3 @@
-
 import React from 'react'
 import './components.css/LesEntres.css'
 import axios from 'axios'
@@ -13,32 +12,33 @@ import Menucomponent from '../Acceuil/component/Menucomponent';
 import { Margin } from '@mui/icons-material';
 
 function TableauDesSorties() {
-    const navigate=useNavigate();
+  const BASE_URL = import.meta.env.VITE_API_URL;
   const [datas,setdatas]=useState([])
+  const navigate = useNavigate()
   const handleAcceuil=()=>{
     navigate("/")
   }
   const handleEntre=()=>{
     navigate("/entre")
  } 
-
+ const getToutLesEntres =() =>{
+  axios.get(`${BASE_URL}/getSortie`)
+    .then(({data})=>{
+      console.log(data)
+    
+      setdatas(data.data)
+    }).catch((err)=>{
+      console.log(err)
+      toast.error("Il a une erreur")
+    })
+}
 
 useEffect(()=>{
-  const getData = async () => {
-    
-    try {
-      // Fetch posts data
-      const data = await axios.get('http://localhost:3000/sorties');
-      setdatas(data.data);
-  
-      
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-  
-  getData();
+  getToutLesEntres();
+ 
 },[])
+
+
 
 
   
@@ -91,13 +91,15 @@ useEffect(()=>{
     </div>
 
     <div>
-      <h1>LES RETRAITS EFFECTUÉS</h1>
+      <h1>TOUT LES  DÉPÔTS </h1>
       <table>
         <thead>
           <tr>
           <th>Date de transaction</th>
-            <th>Designation</th>
+            <th>Provenence</th>
             <th>Montant</th>
+            <th>Action</th>
+            <th>Numero du compte</th>
           </tr>
             
         </thead>
@@ -105,9 +107,11 @@ useEffect(()=>{
     {datas.map((dat, index) => (
        
       <tr  key={index}>
-        <td>{dat.data}</td>
-        <td>{dat.designation}</td>
+        <td>{dat.date_transaction}</td>
+        <td>{dat.provenance}</td>
         <td>{dat.montant}$</td>
+        <td>{dat.action}</td>
+        <td>{dat.tresorerie_id}</td>
       </tr>
      
     ))}

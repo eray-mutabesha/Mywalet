@@ -14,6 +14,9 @@ export default function TableauResultat() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handtableau = () => {
+    navigate("/tresoreriesTableau")
+  };
 const handltresoreries = () =>{
   navigate("/tresoreries")
 }
@@ -38,8 +41,8 @@ const handltresoreries = () =>{
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handltresoreries}>Enregister une operation</MenuItem>
-        <MenuItem onClick={handleClose}>Liste des operations</MenuItem>
+        <MenuItem onClick={handltresoreries}>Creer une tresorerie</MenuItem>
+        <MenuItem onClick={handtableau}>Tresories</MenuItem>
 
         
       </Menu>
