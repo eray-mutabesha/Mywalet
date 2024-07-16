@@ -10,7 +10,7 @@ import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
-
+import Projet from '../Acceuil/component/Projet';
 
 
 
@@ -25,17 +25,22 @@ function Projets() {
      } 
     const { register, handleSubmit,formState:{errors} } = useForm();
     const onSubmit=(data)=>{
-        // gateway pour enregistrer les sorties 
-        axios.post(`${BASE_URL}/insert_project`,data).then((res)=>{
-          console.log(data)
-          toast.success("projet enregistrer")
-        
-          
-        }).catch((err)=>{
-          console.log(err)
-          toast.error("Il a une erreur")
-        })
-       }
+      //  pour enregistrer les sorties 
+      axios.post(`${BASE_URL}/insert_projet`,data)
+     .then(({data})=>{
+    if (data.status == 500) {
+      toast.error("Il a une erreur")
+    } else {
+      console.log(data)
+  
+      toast.success("sotie reussie")
+    }
+    
+  }).catch((err)=>{
+    console.log(err)
+    toast.error("Il a une erreur")
+  })
+     }
 
 
 
@@ -70,18 +75,9 @@ function Projets() {
    <Sorties />
    </Box></nav>
    <nav><Box>
-   <Button
-       sx={{color:"white"}}
-       id="basic-button"
-       aria-controls={open ? 'basic-menu' : undefined}
-       aria-haspopup="true"
-       aria-expanded={open ? 'true' : undefined}
-    
-     >
-       Projets
-     </Button>
+   <Projet/>
    </Box></nav>
-   <nav><MonCompt/></nav>
+   
    <nav><Paramettre /></nav>
    </div>
    

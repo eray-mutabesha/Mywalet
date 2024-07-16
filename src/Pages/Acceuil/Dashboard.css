@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
 }
-
  .div_one{
     margin: 0;
     padding: 0;
@@ -22,35 +21,29 @@
     gap: 5px;
 }
 .div_two{
-    /* display: grid;
-    grid-template-columns:40% 40%; */
     display: flex;
     justify-content:center;
     margin-top: 100px;
-   
-    
 }
 .div_two nav {
-    
     display: block;
     align-items: center;
     justify-content: center;
-   
-    
-  
 }
 .div_two form{
     width: 70%;
     margin: 40px;
     text-align: justify;
 }
-.div_two nav img{
- 
-    
-}
 .form_nav{
     width: 40%;
 }
 .image_nav{
     text-align: center;
+}
+.select{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0);
+    outline: blue;
 }

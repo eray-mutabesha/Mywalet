@@ -66,12 +66,14 @@ const tresorerieOptionsFn =() =>{
     })
 }
 
+
+//protection rootes
 useEffect(()=>{
   tresorerieOptionsFn();
-  if(!localStorage.getItem("Utilisateur")){
-    navigate("/connexion");
-   }
-},[])
+  //  if(!localStorage.getItem("Utilisateur")){
+  //   navigate("/connexion");
+  //  }
+ },[])
 
 
 
@@ -107,7 +109,6 @@ useEffect(()=>{
     <Sorties />
     </Box></nav>
     <nav><Projet/></nav>
-    <nav><MonCompt/></nav>
     <nav><Paramettre /></nav>
     </div>
 
@@ -142,9 +143,9 @@ useEffect(()=>{
          {...register("Action", { required:"Veillez entrez l'action ",minLength:{required:
             "Veillez entrez l'action"
          }})}/>
-         {/*  onChange={(e)=>setForm({...form, tresoreriesID: e.target.value})}*/}
+         
 
-         <select name="" id="" onChange={onChange}  {...register("select", { required:"Veillez entrez l'action "})}>
+         <select className='select' name="" id="" onChange={onChange}  {...register("select", { required:"Veillez entrez l'action "})}>
             <option value="">select tresoreri</option>
             {tresorerieOptions.map((item,index)=>(
               <option key={index} value={item.id}>{item.designation}</option>

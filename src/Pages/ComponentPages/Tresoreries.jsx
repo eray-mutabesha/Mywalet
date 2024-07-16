@@ -10,7 +10,7 @@ import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
-
+import Projet from '../Acceuil/component/Projet';
 
 
 function Tresoreries() {
@@ -65,18 +65,9 @@ function Tresoreries() {
    <Sorties />
    </Box></nav>
    <nav><Box>
-   <Button
-       sx={{color:"white"}}
-       id="basic-button"
-       aria-controls={open ? 'basic-menu' : undefined}
-       aria-haspopup="true"
-       aria-expanded={open ? 'true' : undefined}
-    
-     >
-       Projets
-     </Button>
+   <Projet/>
    </Box></nav>
-   <nav><MonCompt/></nav>
+  
    <nav><Paramettre /></nav>
    </div>
    
@@ -107,8 +98,6 @@ function Tresoreries() {
           {errors.type_de_compte&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
       
-
-
 
           <TextField id="montant" label="Montant" variant="outlined" type="number" fullWidth size='small' 
          {...register("montant", { required:"Veillez entrez la montant"})}/>

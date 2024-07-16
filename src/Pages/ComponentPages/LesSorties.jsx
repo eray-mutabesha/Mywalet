@@ -10,7 +10,7 @@ import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
 import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-
+import Projet from '../Acceuil/component/Projet';
 
 
 
@@ -99,18 +99,9 @@ function LesSorties() {
    <Sorties />
    </Box></nav>
    <nav><Box>
-   <Button
-       sx={{color:"white"}}
-       id="basic-button"
-       aria-controls={open ? 'basic-menu' : undefined}
-       aria-haspopup="true"
-       aria-expanded={open ? 'true' : undefined}
-    
-     >
-       Projets
-     </Button>
+   <Projet/>
    </Box></nav>
-   <nav><MonCompt/></nav>
+
    <nav><Paramettre /></nav>
    </div>
    
@@ -151,7 +142,7 @@ function LesSorties() {
          {...register("Action", { required:"Veillez entrez l'action ",minLength:{required:
             "Veillez entrez l'action"
          }})}/>
-        <select name="" id="" onChange={onChange}  {...register("select", { required:"Veillez entrez l'action "})}>
+        <select className='select' name="" id="" onChange={onChange}  {...register("select", { required:"Veillez entrez l'action "})}>
             <option value="">select tresorerie</option>
             {tresorerieOptions.map((item,index)=>(
               <option key={index} value={item.id}>{item.designation}</option>

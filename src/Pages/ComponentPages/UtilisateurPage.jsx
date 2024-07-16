@@ -8,37 +8,17 @@ import TableauResultat from '../Acceuil/component/TableauResultat'
 import MonCompt from '../Acceuil/component/MonCompt'
 import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
-import Menucomponent from '../Acceuil/component/Menucomponent';
 import { useNavigate } from 'react-router-dom';
 import './components.css/Utilisateur.css'
 import { useEffect,useState } from 'react';
 import { isEmpty } from '../../Outils';
-
+import Projet from '../Acceuil/component/Projet';
 
 
 function UtilisateurPage() {
   const BASE_URL = import.meta.env.VITE_API_URL;
+
     const navigate=useNavigate()
-
-  const deletefuction= ()=>{
-
-   
-       // API de la base des donnes pour stocker les infos de l'utilisateur 
-       axios.delete(`${BASE_URL}/deleteUtilisateurData`)
-       .then(()=>{
-         
-         toast.success("supression reussie")
-        
-       }).catch((err)=>{
-         console.log(err)
-         toast.err("Il a une erreur")
-       })
-   
-
-  }
-
-
-
     const [datas,setdatas]=useState([])
     const handleAcceuil=()=>{
         navigate("/")
@@ -46,6 +26,7 @@ function UtilisateurPage() {
     const handleEntre=()=>{
         navigate("/entre")
      } 
+
 
      useEffect(()=>{
       const getData = async () => {
@@ -103,18 +84,9 @@ function UtilisateurPage() {
    <Sorties />
    </Box></nav>
    <nav><Box>
-   <Button
-       sx={{color:"white"}}
-       id="basic-button"
-       aria-controls={open ? 'basic-menu' : undefined}
-       aria-haspopup="true"
-       aria-expanded={open ? 'true' : undefined}
-    
-     >
-       Projets
-     </Button>
+   <Projet/>
    </Box></nav>
-   <nav><MonCompt/></nav>
+   
    <nav><Paramettre /></nav>
    </div>
 
@@ -127,8 +99,6 @@ function UtilisateurPage() {
           <div className='administrateur'>
             <h2>Administrateur</h2>
             <p><strong>Email:</strong><span>{!isEmpty(datas)&&datas[0].email}</span></p>
-            <p>Supprimer le compte</p>
-            <img onClick={deletefuction} src='public\deleteimage.png'/>
           </div>
           <div className='identities'>
             <nav><p><strong>Nom:</strong><span>{!isEmpty(datas)&&datas[0].name}</span></p><img src='public\editPhoto-removebg-preview.png'/></nav>

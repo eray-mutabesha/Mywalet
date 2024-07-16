@@ -10,6 +10,9 @@ import Paramettre from '../Acceuil/component/Paramettre'
 import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { Margin } from '@mui/icons-material';
+import Projet from '../Acceuil/component/Projet';
+import { isEmpty } from '../../Outils';
+
 
 function TableauDesSorties() {
   const BASE_URL = import.meta.env.VITE_API_URL;
@@ -39,6 +42,19 @@ useEffect(()=>{
 },[])
 
 
+
+const deleteSortie = (model) => {
+  axios.delete(`${BASE_URL}/deleteSortie/${model.id}`)
+    .then(({ data }) => {
+      console.log(data);
+      setdatas(data.data || []); // Assurez-vous que data.data est un tableau
+      getToutLesEntres();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
 
 
   
@@ -75,18 +91,9 @@ useEffect(()=>{
     <Sorties />
     </Box></nav>
     <nav><Box>
-    <Button
-        sx={{color:"white"}}
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-     
-      >
-        Projets
-      </Button>
+    <Projet/>
     </Box></nav>
-    <nav><MonCompt/></nav>
+    
     <nav><Paramettre /></nav>
     </div>
 
@@ -100,21 +107,29 @@ useEffect(()=>{
             <th>Montant</th>
             <th>Action</th>
             <th>Numero du compte</th>
+            <th>Action</th>
           </tr>
             
         </thead>
         <tbody >
-    {datas.map((dat, index) => (
-       
-      <tr  key={index}>
-        <td>{dat.date_transaction}</td>
-        <td>{dat.provenance}</td>
-        <td>{dat.montant}$</td>
-        <td>{dat.action}</td>
-        <td>{dat.tresorerie_id}</td>
-      </tr>
-     
-    ))}
+        {datas.length > 0 ? datas.map((dat, index) => (
+              <tr key={index}>
+                <td>{!isEmpty(dat) && dat.date_transaction}</td>
+                <td>{!isEmpty(dat) && dat.provenance}</td>
+                <td>{!isEmpty(dat) && dat.montant}$</td>
+                <td>{!isEmpty(dat) && dat.action}</td>
+                <td>{!isEmpty(dat) && dat.designation}</td>
+                <td className='action'>
+                  <img src='public/editPhoto-removebg-preview.png' className='corbeil_image' />
+                  <img src='public/up_2.png' className='corbeil_image' />
+                  <img src='/public/delete_corbrille.png' className='corbeil_image' onClick={() => deleteSortie(dat)} />
+                </td>
+              </tr>
+            )) : (
+              <tr>
+                <td colSpan="6">Aucune donnée disponible</td>
+              </tr>
+            )}
    </tbody>
 </table>
   

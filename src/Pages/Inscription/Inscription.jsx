@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 
 
 function Inscription() {
+
   const BASE_URL = import.meta.env.VITE_API_URL;
     const navigate=useNavigate();
       useEffect(()=>{
@@ -15,7 +16,10 @@ function Inscription() {
           navigate("/");
          }
        })
+
+
     const { register, handleSubmit,formState:{errors} } = useForm();
+
     const onSubmit=(data)=>{
         if(data.mot_depasse !== data.confirm_mot_depasse){
               toast.error("les mots de passes ne sont pas identique")
@@ -23,9 +27,8 @@ function Inscription() {
            // API de la base des donnes pour stocker les infos de l'utilisateur 
           axios.post(`${BASE_URL}/insert_utilisateur`,data)
           .then(({data})=>{
-            console.log(data)
-            localStorage.setItem("Utilisateur", JSON.stringify(res.data[0]))
-            console.log(res)
+            localStorage.setItem("Utilisateur", JSON.stringify(data))
+          
             toast.success("Inscription reussie")
             navigate("/")
           }).catch((err)=>{
