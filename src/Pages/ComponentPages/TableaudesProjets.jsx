@@ -11,7 +11,7 @@ import Sorties from '../Acceuil/component/Sorties'
 import Menucomponent from '../Acceuil/component/Menucomponent';
 import { Margin } from '@mui/icons-material';
 import Projet from '../Acceuil/component/Projet';
-
+import toast from 'react-hot-toast';
 
 
 function TableaudesProjets() {
@@ -41,8 +41,18 @@ useEffect(()=>{
  
 },[])
 
-
-
+const deleteEntree = (model) => {
+  axios.delete(`${BASE_URL}/deleteProjet/${model.id}`)
+    .then(({ data }) => {
+      console.log(data);
+      setdatas(data.data || []); // Assurez-vous que data.data est un tableau
+      getToutLesEntres();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
 
   
     
@@ -98,21 +108,24 @@ useEffect(()=>{
             
         </thead>
         <tbody >
-    {datas.map((dat, index) => (
-       
-      <tr  key={index}>
-        <td>{dat.designation}</td>
-        <td>{dat.date_debut}</td>
-        <td>{dat.date_fin}</td>
-        <td>{dat.montant}$</td>
-        <td className='action'>
-          <img src ='public\editPhoto-removebg-preview.png' className='corbeil_image' />
-          <img src ='public\up_2.png' className='corbeil_image' />
-          <img src ='/public/delete_corbrille.png' className='corbeil_image'/>
-        </td>
-      </tr>
-     
-    ))}
+        {datas.length > 0 ? datas.map((dat, index) => (
+              <tr  key={index}>
+              <td>{dat.designation}</td>
+              <td>{dat.date_debut}</td>
+              <td>{dat.date_fin}</td>
+              <td>{dat.montant}$</td>
+              <td className='action'>
+                <img src ='public\editPhoto-removebg-preview.png' className='corbeil_image' />
+                <img src ='public\up_2.png' className='corbeil_image' />
+                <img src ='/public/delete_corbrille.png' className='corbeil_image' onClick={() => deleteEntree(dat)}/>
+              </td>
+            </tr>
+            )) : (
+              <tr>
+                <td colSpan="6">Aucune donnée disponible</td>
+              </tr>
+            )}
+    
    </tbody>
 </table>
   

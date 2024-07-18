@@ -9,12 +9,16 @@ import MonCompt from '../Acceuil/component/MonCompt';
 import Paramettre from '../Acceuil/component/Paramettre';
 import Projet from '../Acceuil/component/Projet';
 import Sorties from '../Acceuil/component/Sorties';
+import Dashboard from '../Acceuil/Dashboard';
 import { isEmpty } from '../../Outils';
 import toast from 'react-hot-toast'; 
+
 
 function LesEntres() {
   const BASE_URL = import.meta.env.VITE_API_URL;
   const [datas, setDatas] = useState([]);
+  const [singleEntre, setSingleEntre] = useState([]);
+  const [formVisible, setFormVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleAcceuil = () => {
@@ -45,7 +49,7 @@ function LesEntres() {
     axios.delete(`${BASE_URL}/deleteEntree/${model.id}`)
       .then(({ data }) => {
         console.log(data);
-        setDatas(data.data || []); // Assurez-vous que data.data est un tableau
+        setDatas(data.data || []); // Assurer que data.data est un tableau
         getToutLesEntres();
       })
       .catch((err) => {
@@ -54,6 +58,19 @@ function LesEntres() {
       });
   };
 
+
+  const handleUpdate = () => {
+    setFormVisible(false);
+    getToutLesEntres();
+  };
+
+const EditEntre=(modal)=>{
+  setSingleEntre(modal)
+  setFormVisible(true)
+}
+
+
+if (formVisible==false) {
   return (
     <>
       <div className='div_one'>
@@ -113,7 +130,7 @@ function LesEntres() {
                 <td>{!isEmpty(dat) && dat.action}</td>
                 <td>{!isEmpty(dat) && dat.designation}</td>
                 <td className='action'>
-                  <img src='public/editPhoto-removebg-preview.png' className='corbeil_image' />
+                  <img src='public/editPhoto-removebg-preview.png' className='corbeil_image' onClick={() => EditEntre(dat)}/>
                   <img src='public/up_2.png' className='corbeil_image' />
                   <img src='/public/delete_corbrille.png' className='corbeil_image' onClick={() => deleteEntree(dat)} />
                 </td>
@@ -128,6 +145,11 @@ function LesEntres() {
       </div>
     </>
   );
+} else{
+  return <Dashboard singleEntre={singleEntre}  onUpdate={handleUpdate}/>
 }
+} 
+
+  
 
 export default LesEntres;

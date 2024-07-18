@@ -15,10 +15,12 @@ import axios from 'axios';
 import { useEffect } from 'react'
 import Projet from './component/Projet'
 
-function Dashboard() {
+function Dashboard({singleEntre,onUpdate }) {
+
+
   const BASE_URL = import.meta.env.VITE_API_URL;
-  const { register, handleSubmit,formState:{errors} } = useForm();
-  const { onChange} = register('select'); 
+   const { register, handleSubmit,formState:{errors} } = useForm();
+  // const { onChange} = register('select');
 
   const [tresorerieOptions, settresorerieOptions] = useState([]);
   const navigate= useNavigate();
@@ -29,31 +31,65 @@ function Dashboard() {
      navigate("/entre")
   } 
 
+// 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+  const [formData, setFormData] = useState({
+    data_de_tansaction: "",
+    Provenence: "",
+    Montant: "",
+    Action: "",
+    select: ""
+  });
 
 
+  useEffect(() => {
+    if (singleEntre) {
+      setFormData({
+        data_de_tansaction: singleEntre.date_transaction || "",
+        Provenence: singleEntre.provenance || "",
+        Montant: singleEntre.montant || "",
+        Action: singleEntre.action || "",
+        select: singleEntre.designation || ""
+      });
+    }
+  }, [singleEntre]);
 
 
-const onSubmit=(data)=>{
-     // API de la base des donnes pour stocker les infos des entres 
-    axios.post(`${BASE_URL}/insert_entres`,data)
-    .then(({data})=>{
-      if (data.status == 500) {
-        toast.error("Il a une erreur")
-      } else {
-        console.log(data)
-    
-        toast.success("Depot reussie")
-      }
-      
-    
-    }).catch((err)=>{
-      console.log(err)
-      toast.error("Il a une erreur")
-    })
-      
-  
-}
+const onSubmit = (data) => {
+  if (singleEntre && singleEntre.id) {
+    // API pour mettre à jour les données
+    axios.put(`${BASE_URL}/updateEntree/${singleEntre.id}`, data)
+      .then(({ data }) => {
+        if (data.status == 500) {
+          toast.error("Il y a une erreur");
+        } else {
+          toast.success("Mise à jour réussie");
+          if (onUpdate) {
+            onUpdate();
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  } else {
+    // API pour insérer les données
+    axios.post(`${BASE_URL}/insert_entres`, data)
+      .then(({ data }) => {
+        if (data.status == 500) {
+          toast.error("Il y a une erreur");
+        } else {
+          toast.success("Dépôt réussi");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  }
+};
 
+// 88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 const tresorerieOptionsFn =() =>{
   axios.get(`${BASE_URL}/getTresorerieOptions`)
     .then(({data})=>{
@@ -70,6 +106,9 @@ const tresorerieOptionsFn =() =>{
 //protection rootes
 useEffect(()=>{
   tresorerieOptionsFn();
+  if (singleEntre) {
+    console.log(singleEntre)
+  }
   //  if(!localStorage.getItem("Utilisateur")){
   //   navigate("/connexion");
   //  }
@@ -123,44 +162,76 @@ useEffect(()=>{
         }}>
 
   
-        <TextField id="filled-basic"  variant="outlined" type="date" fullWidth size='small' 
-         {...register("data_de_tansaction", { required:"Veillez entrez la date de transaction"})}/>
-          {errors.data_de_tansaction&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+<TextField
+      id="filled-basic"
+      variant="outlined"
+      type="date"
+      fullWidth
+      size='small'
+      {...register("data_de_tansaction", { required: "Veuillez entrer la date de transaction" })}
+      value={formData.data_de_tansaction}
+      onChange={(e) => setFormData({ ...formData, data_de_tansaction: e.target.value })}
+    />
+    {errors.data_de_tansaction && <span sx={{ color: "red" }}>Ce champ est obligatoire</span>}
 
-        <TextField id="filled-basic" label="Provenence" variant="outlined" type="text" fullWidth size='small' 
-         {...register("Provenence", { required:"Veillez entrez la provenence",minLength:{required:
-            "Veillez entrez le provenence"
-         }})}/>
-          {errors.Provenence&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
+ 
+    <TextField
+      id="filled-basic"
+      label="Provenance"
+      variant="outlined"
+      type="text"
+      fullWidth
+      size='small'
+      {...register("Provenence", { required: "Veuillez entrer la provenance" })}
+      value={formData.Provenence}
+      onChange={(e) => setFormData({ ...formData, Provenence: e.target.value })}
+    />
+    {errors.Provenence && <span sx={{ color: "red" }}>Ce champ est obligatoire</span>}
 
-          <TextField id="filled-basic" label="Montant" variant="outlined" type="number" fullWidth size='small' 
-         {...register("Montant", { required:"Veillez entrez le montant",minLength:{required:
-            "Veillez entrez le montant"
-         }})}/>
-          {errors.Montant&& <span sx={{color:"red"}}>Ce champ est obligatoire</span>}
 
-          <TextField id="filled-basic" label="Action" variant="outlined" type="text" fullWidth size='small' 
-         {...register("Action", { required:"Veillez entrez l'action ",minLength:{required:
-            "Veillez entrez l'action"
-         }})}/>
+        
+    <TextField
+      id="filled-basic"
+      label="Montant"
+      variant="outlined"
+      type="number"
+      fullWidth
+      size='small'
+      {...register("Montant", { required: "Veuillez entrer le montant" })}
+      value={formData.Montant}
+      onChange={(e) => setFormData({ ...formData, Montant: e.target.value })}
+    />
+    {errors.Montant && <span sx={{ color: "red" }}>Ce champ est obligatoire</span>}
+
+
+
+    <TextField
+      id="filled-basic"
+      label="Action"
+      variant="outlined"
+      type="text"
+      fullWidth
+      size='small'
+      {...register("Action", { required: "Veuillez entrer l'action" })}
+      value={formData.Action}
+      onChange={(e) => setFormData({ ...formData, Action: e.target.value })}
+    />
+
          
-
-         <select className='select' name="" id="" onChange={onChange}  {...register("select", { required:"Veillez entrez l'action "})}>
-            <option value="">select tresoreri</option>
-            {tresorerieOptions.map((item,index)=>(
-              <option key={index} value={item.id}>{item.designation}</option>
-            ))}
-            
-          </select>
-
-         
-
-
-
+          <select
+            className='select'
+            {...register("select", { required: "Veuillez entrer l'action" })}
+            value={formData.select}
+            onChange={(e) => setFormData({ ...formData, select: e.target.value })}
+          >
+           <option value="">Sélectionner trésorerie</option>
+           {tresorerieOptions.map((item, index) => (
+           <option key={index} value={item.id}>{item.designation}</option>
+           ))}
+         </select>
         </Box>
         
         <Box sx={{
-          
           display:"flex",
           justifyContent: "space-between"
         }}>
